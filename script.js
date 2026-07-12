@@ -1,4 +1,3 @@
-// complete this js code
 function Person(name, age) {
   this.name = name;
   this.age = age;
@@ -10,10 +9,12 @@ Person.prototype.greet = function () {
 
 function Employee(name, age, jobTitle) {
   Person.call(this, name, age);
+
   this.jobTitle = jobTitle;
 }
 
-Employee.prototype = new Person();
+Employee.prototype = Object.create(Person.prototype);
+
 Employee.prototype.constructor = Employee;
 
 Employee.prototype.jobGreet = function () {
@@ -22,6 +23,13 @@ Employee.prototype.jobGreet = function () {
   );
 };
 
-// Do not change code below this line
+function runDemo() {
+  const person = new Person("Alice", 25);
+  person.greet();
+
+  const employee = new Employee("Bob", 30, "Manager");
+  employee.jobGreet();
+}
+
 window.Person = Person;
 window.Employee = Employee;
